@@ -27,4 +27,11 @@ class UserController extends Controller
 
         return UserRepository::updateUserDetails($user, $inputs);
     }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+
+        return UserRepository::delete($user);
+    }
 }

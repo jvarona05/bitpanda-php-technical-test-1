@@ -39,4 +39,21 @@ class UserRepository
             return Response::error($th->getMessage());
         }
     }
+
+    static function delete(User $user)
+    {
+        try {
+            if($user->hasDetails()) {
+                return Response::error(
+                    "the user cannot be deleted because it has details"
+                );
+            }
+    
+            $user->delete();
+
+            return Response::success();
+        } catch (\Throwable $th) {
+            return Response::error($th->getMessage());
+        }
+    }
 }

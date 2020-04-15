@@ -19,5 +19,8 @@ Route::prefix('v1')->group(function () {
         ->name('api.users');
 
     Route::put('users/{id}/details', 'UserController@updateDetails')
-        ->name('api.update.user.details')->where(['id' => '^[-+]?\d*$']);;
+        ->name('api.update.user.details')->where(['id' => '^[-+]?\d*$']);
+    
+    Route::delete('users/{id}', 'UserController@delete')
+        ->name('api.delete.user')->where(['id' => '^[-+]?\d*$']);
 });
