@@ -2,8 +2,9 @@
 
 namespace App\Repository;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response as LaravelResponse;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use App\Utils\Response;
 use App\User;
 
@@ -26,7 +27,7 @@ class UserRepository
         return $users->get();
     }
 
-    static function updateUserDetails(User $user, array $userDetails)
+    static function updateUserDetails(User $user, array $userDetails) : LaravelResponse
     {
         try {
             if(!$user->hasDetails()) {
@@ -41,7 +42,7 @@ class UserRepository
         }
     }
 
-    static function delete(User $user)
+    static function delete(User $user) : LaravelResponse
     {
         try {
             if($user->hasDetails()) {
