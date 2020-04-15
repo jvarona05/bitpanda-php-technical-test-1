@@ -20,10 +20,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get country.
+     * Get user details.
      */
-    public function country()
+    public function details()
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasOne(UserDetail::class);
     }
 }

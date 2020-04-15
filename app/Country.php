@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     /**
-     * Get users.
+     * Get user details.
      */
-    public function users()
+    public function userDetails()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(UserDetail::class, 'citizenship_country_id');
     }
 }
