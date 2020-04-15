@@ -12,8 +12,8 @@ class UserRepository
     {
         $users = User::with('details');
 
-        if(isset($filters['status'])) {
-            $users->whereActive($filters['status']);
+        if(isset($filters['active'])) {
+            $users->whereActive($filters['active']);
         }
 
         if(isset($filters['country'])) {

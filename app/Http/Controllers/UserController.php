@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $filters = [ 'country' => 'AT', 'status' => true ];
+        $filters = [ 'country' => 'AT', 'active' => true ];
 
         $users = UserRepository::getFilteredUsers($filters);
 
