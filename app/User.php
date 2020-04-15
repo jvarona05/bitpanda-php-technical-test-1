@@ -18,4 +18,12 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
     ];
+
+    /**
+     * Get country.
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
