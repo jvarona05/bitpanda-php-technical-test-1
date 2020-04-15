@@ -6,11 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserDetailsRequest;
 use App\Repository\UserRepository;
+use App\Http\Requests\UserFiltersRequest;
 use App\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserFiltersRequest $request)
+    {
+        $filters = $request->all();
+
+        $users = UserRepository::getFilteredUsers($filters);
+
+        return UserResource::collection($users);
+    }
+
+    public function getAustrianUsers(Type $var = null)
     {
         $filters = [ 'country' => 'AT', 'active' => true ];
 

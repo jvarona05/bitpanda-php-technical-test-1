@@ -3,12 +3,13 @@
 namespace App\Repository;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use App\Utils\Response;
 use App\User;
 
 class UserRepository
 {
-    static function getFilteredUsers(array $filters = [])
+    static function getFilteredUsers(array $filters = []) : Collection
     {
         $users = User::with('details');
 

@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
     Route::get('users', 'UserController@index')
         ->name('api.users');
     
-    Route::get('austria/users', 'UserController@index')
+    Route::get('austria/users', 'UserController@getAustrianUsers')
         ->name('api.austria.users');
 
     Route::put('users/{id}/details', 'UserController@updateDetails')
