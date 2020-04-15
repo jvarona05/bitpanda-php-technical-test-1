@@ -50,4 +50,9 @@ class User extends Authenticatable
             ->join('user_details', 'users.id', '=', 'user_details.user_id')
             ->join('countries', 'user_details.citizenship_country_id', '=', 'countries.id');
     }
+
+    public function hasDetails(){
+    
+        return (bool) $this->details;
+    }
 }

@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserDetail extends Model
 {
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'citizenship_country_id',
+        'first_name',
+        'last_name',
+        'phone_number'
+    ];
+
     /**
      * Get the user that owns the details.
      */

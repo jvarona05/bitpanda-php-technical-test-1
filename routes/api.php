@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::get('users', 'UserController@index')
         ->name('api.users');
+
+    Route::put('users/{id}/details', 'UserController@updateDetails')
+        ->name('api.update.user.details')->where(['id' => '^[-+]?\d*$']);;
 });
