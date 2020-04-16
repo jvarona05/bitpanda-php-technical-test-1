@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserDetailsRequest;
 use App\Repository\UserRepository;
@@ -20,7 +19,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function getAustrianUsers(Type $var = null)
+    public function getAustrianUsers()
     {
         $filters = [ 'country' => 'AT', 'active' => true ];
 
@@ -29,7 +28,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function updateDetails(UserDetailsRequest $request, $id)
+    public function updateDetails(UserDetailsRequest $request, int $id)
     {
         $user = User::findOrFail($id);
 
@@ -38,7 +37,7 @@ class UserController extends Controller
         return UserRepository::updateUserDetails($user, $inputs);
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         $user = User::findOrFail($id);
 
