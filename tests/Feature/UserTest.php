@@ -176,7 +176,38 @@ class UserTest extends ApiTestCase
                 ->assertJson([
                     'success' => false,
                     'message' => "The user doesn't have details"
-                ]);;
+                ]);
+    }
+
+    /** @test */
+    public function get_not_found_if_the_user_id_is_incorrect()
+    {        
+        $id = 'This is an incorrect id';
+        
+        $this->putJson(route('api.update.user.details', compact('id')))
+                ->assertStatus(404);
+    }
+
+    /** @test */
+    public function can_delete_an_user()
+    {                
+        $this->deleteJson(route('api.delete.user', ['id' => 2]))
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => "Succesfully"
+            ]);
+    }
+
+    /** @test */
+    public function cannot_delete_a_user_if_it_has_details()
+    {                
+        $this->deleteJson(route('api.delete.user', ['id' => 1]))
+            ->assertStatus(500)
+            ->assertJson([
+                'success' => false,
+                'message' => "The user cannot be deleted because it has details"
+            ]);
     }
 
     private function getUsers(array $filters = [])
