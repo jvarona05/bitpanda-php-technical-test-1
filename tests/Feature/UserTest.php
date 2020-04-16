@@ -87,7 +87,7 @@ class UserTest extends ApiTestCase
     }
 
     /** @test */
-    public function get_empty_array_when_no_austria_users()
+    public function get_empty_array_when_no_austrian_users_in_the_db()
     {                
         UserUtils::removeUsersByCountry('AT');
 
