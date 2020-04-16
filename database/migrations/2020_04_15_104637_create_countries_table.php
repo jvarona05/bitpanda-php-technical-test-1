@@ -16,7 +16,7 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name', 63)->comment('English country name.');
-            $table->string('iso2', 2)->comment('ISO 3166-2 two letter upper case country code.');
+            $table->string('iso2', 2)->index()->comment('ISO 3166-2 two letter upper case country code.');
             $table->string('iso3', 3)->comment('ISO 3166-3 three letter upper case country code.');
         });
     }
