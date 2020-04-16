@@ -47,7 +47,7 @@ class UserRepository
         try {
             if($user->hasDetails()) {
                 return Response::error(
-                    "the user cannot be deleted because it has details"
+                    "The user cannot be deleted because it has details"
                 );
             }
     

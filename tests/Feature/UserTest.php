@@ -188,6 +188,28 @@ class UserTest extends ApiTestCase
                 ->assertStatus(404);
     }
 
+    /** @test */
+    public function can_delete_an_user()
+    {                
+        $this->deleteJson(route('api.delete.user', ['id' => 2]))
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => "Succesfully"
+            ]);
+    }
+
+    /** @test */
+    public function cannot_delete_an_user_if_it_has_details()
+    {                
+        $this->deleteJson(route('api.delete.user', ['id' => 1]))
+            ->assertStatus(500)
+            ->assertJson([
+                'success' => false,
+                'message' => "The user cannot be deleted because it has details"
+            ]);
+    }
+
     private function getUsers(array $filters = [])
     {
         return $this->getJson(route('api.users', $filters))
