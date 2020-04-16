@@ -200,7 +200,7 @@ class UserTest extends ApiTestCase
     }
 
     /** @test */
-    public function cannot_delete_an_user_if_it_has_details()
+    public function cannot_delete_a_user_if_it_has_details()
     {                
         $this->deleteJson(route('api.delete.user', ['id' => 1]))
             ->assertStatus(500)
