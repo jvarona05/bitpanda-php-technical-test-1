@@ -19,7 +19,7 @@ Route::prefix('v1')->group(function () {
         ->name('api.users');
     
     Route::get('austria/users', 'UserController@getAustrianUsers')
-        ->name('api.austria.users');
+        ->name('api.austrian.users');
 
     Route::put('users/{id}/details', 'UserController@updateDetails')
         ->name('api.update.user.details')->where(['id' => '^[-+]?\d*$']);

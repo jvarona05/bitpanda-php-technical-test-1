@@ -78,7 +78,7 @@ class UserTest extends ApiTestCase
     /** @test */
     public function get_active_users_from_austria()
     {                
-        $this->getJson(route('api.austria.users'))
+        $this->getJson(route('api.austrian.users'))
                     ->assertStatus(200)
                     ->assertJsonCount(2, 'data')
                     ->assertJsonStructure(UserUtils::$usersStructure)
@@ -91,7 +91,7 @@ class UserTest extends ApiTestCase
     {                
         UserUtils::removeUsersByCountry('AT');
 
-        $this->getJson(route('api.austria.users'))
+        $this->getJson(route('api.austrian.users'))
                     ->assertStatus(200)
                     ->assertJsonCount(0, 'data');
     }
