@@ -73,4 +73,4 @@ docker exec -ti laradock_workspace_1 php artisan test
 http://localhost/
 ```
  
- Note: the app will ask you to generate the Laravel APP_KEY
+ Note: The app will ask you to generate the Laravel APP_KEY and then refresh the page.
