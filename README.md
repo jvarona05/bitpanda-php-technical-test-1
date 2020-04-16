@@ -55,7 +55,7 @@ docker-compose up -d nginx mysql workspace
 ```
 
 Note: The containers use the ports 80 and 3306. Please,
-don't have any programs running on these ports.
+don't have any programs running on these ports in your machine.
 
 ### Configure the project
 
