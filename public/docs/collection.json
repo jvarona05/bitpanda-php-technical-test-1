@@ -1,0 +1,158 @@
+{
+    "variables": [],
+    "info": {
+        "name": "Laravel API",
+        "_postman_id": "11d50bae-ab97-47f8-9220-759a80394af1",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Users",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get Users",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/users",
+                            "query": [
+                                {
+                                    "key": "country",
+                                    "value": "RU",
+                                    "description": "Country iso2 code.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "active",
+                                    "value": "1",
+                                    "description": "The user status.",
+                                    "disabled": false
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Returns users filtered by country and status.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Get Austrian Users",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/austria\/users",
+                            "query": []
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "Returns all the users which are `active` (users table) and have an Austrian citizenship.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Update User Details",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/users\/:id\/details",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The User ID."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenship_country_id\": 2,\n    \"first_name\": \"Jose Manuel\",\n    \"last_name\": \"Rodriguez Varona\",\n    \"phone_number\": \"000000000\"\n}"
+                        },
+                        "description": "It will allow you to edit user details just if the user details are there already.",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost",
+                            "path": "api\/v1\/users\/:id",
+                            "query": [],
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "nulla",
+                                    "description": "The User ID."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "It will allow you to delete a user just if no user details exist yet.",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}

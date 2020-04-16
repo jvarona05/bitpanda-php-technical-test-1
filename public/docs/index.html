@@ -1,0 +1,433 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript","php"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                                  <a href="#" data-language-name="php">php</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.
+<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<!-- END_INFO -->
+<h1>Users</h1>
+<!-- START_1aff981da377ba9a1bbc56ff8efaec0d -->
+<h2>Get Users</h2>
+<p>Returns users filtered by country and status.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/v1/users?country=RU&amp;active=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/users"
+);
+
+let params = {
+    "country": "RU",
+    "active": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/users',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'country'=&gt; 'RU',
+            'active'=&gt; '1',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "type": "user",
+            "attributes": {
+                "email": "rerere@test_mail.com",
+                "active": 1,
+                "first_name": "Igor",
+                "last_name": "Snow",
+                "phone_number": "0043664777777"
+            },
+            "id": 7
+        },
+        {
+            "type": "user",
+            "attributes": {
+                "email": "jose.varona02@gmail.com",
+                "active": 1,
+                "first_name": "José Manuel",
+                "last_name": "Rodríguez",
+                "phone_number": "000000000"
+            },
+            "id": 8
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/users</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>country</code></td>
+<td>optional</td>
+<td>Country iso2 code.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>optional</td>
+<td>The user status.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1aff981da377ba9a1bbc56ff8efaec0d -->
+<!-- START_220f0ffa0999a0f812939e384addae84 -->
+<h2>Get Austrian Users</h2>
+<p>Returns all the users which are <code>active</code> (users table) and have an Austrian citizenship.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/v1/austria/users" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/austria/users"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost/api/v1/austria/users',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "data": [
+        {
+            "type": "user",
+            "attributes": {
+                "email": "alex@tempmail.com",
+                "active": 1,
+                "first_name": "Alex",
+                "last_name": "Petro",
+                "phone_number": "0043664111111"
+            },
+            "id": 1
+        },
+        {
+            "type": "user",
+            "attributes": {
+                "email": "Taaaaaaa@test.com",
+                "active": 1,
+                "first_name": "Max",
+                "last_name": "Mustermann",
+                "phone_number": "00436646666666"
+            },
+            "id": 6
+        }
+    ]
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/austria/users</code></p>
+<!-- END_220f0ffa0999a0f812939e384addae84 -->
+<!-- START_d06c57308ee68dc40d506d3cca59c67c -->
+<h2>Update User Details</h2>
+<p>It will allow you to edit user details just if the user details are there already.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost/api/v1/users/1/details" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"citizenship_country_id":2,"first_name":"Jose Manuel","last_name":"Rodriguez Varona","phone_number":"000000000"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/users/1/details"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "citizenship_country_id": 2,
+    "first_name": "Jose Manuel",
+    "last_name": "Rodriguez Varona",
+    "phone_number": "000000000"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;put(
+    'http://localhost/api/v1/users/1/details',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'citizenship_country_id' =&gt; 2,
+            'first_name' =&gt; 'Jose Manuel',
+            'last_name' =&gt; 'Rodriguez Varona',
+            'phone_number' =&gt; '000000000',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": true,
+    "message": "Succesfully"
+}</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": false,
+    "message": "The user doesn't have details"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/v1/users/{id}/details</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The User ID.</td>
+</tr>
+</tbody>
+</table>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>citizenship_country_id</code></td>
+<td>integer</td>
+<td>required</td>
+<td>Country id.</td>
+</tr>
+<tr>
+<td><code>first_name</code></td>
+<td>string</td>
+<td>required</td>
+<td>User Firstname.</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>string</td>
+<td>required</td>
+<td>User Lastname.</td>
+</tr>
+<tr>
+<td><code>phone_number</code></td>
+<td>string</td>
+<td>required</td>
+<td>User Phonenumber.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_d06c57308ee68dc40d506d3cca59c67c -->
+<!-- START_8b97688fa48f9a3858d3b640a906b76b -->
+<h2>Delete User</h2>
+<p>It will allow you to delete a user just if no user details exist yet.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/v1/users/nulla" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/users/nulla"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost/api/v1/users/nulla',
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": true,
+    "message": "Succesfully"
+}</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "success": false,
+    "message": "The user cannot be deleted because it has details"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/v1/users/{id}</code></p>
+<h4>URL Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>required</td>
+<td>The User ID.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_8b97688fa48f9a3858d3b640a906b76b -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                                    <a href="#" data-language-name="php">php</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>
