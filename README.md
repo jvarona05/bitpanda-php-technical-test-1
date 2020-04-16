@@ -54,12 +54,15 @@ cp env-example .env
 docker-compose up -d nginx mysql workspace 
 ```
 
+Note: the containers use the ports 80 and 3306. Please,
+don't have any programs running on these ports.
+
 ### Configure the project
 
 ```
 docker exec -ti laradock_workspace_1 composer install
 
-docker exec -ti laradock_workspace_1 php artisan migrate --seed
+docker exec -ti laradock_workspace_1 php artisan migrate:fresh --seed
 
 docker exec -ti laradock_workspace_1 php artisan test
 ```
