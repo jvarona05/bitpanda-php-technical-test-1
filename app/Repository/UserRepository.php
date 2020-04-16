@@ -10,6 +10,13 @@ use App\User;
 
 class UserRepository
 {
+    /**
+     * Returns User Colection filtered by user country and status
+     * 
+     * @param array $filters. example ['active' => true, 'country' => 'AT']
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     static function getFilteredUsers(array $filters = []) : Collection
     {
         $users = User::with('details');

@@ -22,6 +22,8 @@ class UserController extends Controller
      * 
      * @queryParam active The user status. Example: 1
      * 
+     * @param UserFiltersRequest $request
+     *  
      * @return \Illuminate\Http\Response
      */
     public function index(UserFiltersRequest $request)
