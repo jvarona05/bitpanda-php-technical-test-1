@@ -33,7 +33,7 @@ Test to demonstrate skills and mastery in PHP.
 ```
 git clone https://github.com/jvarona05/bitpanda-php-technical-test-1.git
 
-cd bitpanda-sample
+cd bitpanda-php-technical-test-1
 ```
 
 ### Create .env file
