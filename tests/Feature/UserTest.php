@@ -176,7 +176,16 @@ class UserTest extends ApiTestCase
                 ->assertJson([
                     'success' => false,
                     'message' => "The user doesn't have details"
-                ]);;
+                ]);
+    }
+
+    /** @test */
+    public function get_not_found_if_the_user_id_is_incorrect()
+    {        
+        $id = 'This is an incorrect id';
+        
+        $this->putJson(route('api.update.user.details', compact('id')))
+                ->assertStatus(404);
     }
 
     private function getUsers(array $filters = [])
