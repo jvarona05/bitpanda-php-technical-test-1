@@ -4,8 +4,10 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\ApiTestCase;
+use Illuminate\Testing\TestResponse;
 use Tests\Utils\UserUtils;
+use Tests\ApiTestCase;
+use App\UserDetail;
 
 class UserTest extends ApiTestCase
 {
@@ -53,12 +55,12 @@ class UserTest extends ApiTestCase
         $filters = ['country' => 'DO'];
         
         $this->getJson(route('api.users', $filters))
-                    ->assertStatus(422)
-                    ->assertJsonFragment([
-                        'errors' => [
-                            'country' => ['The selected country is invalid.']
-                        ]
-                    ]);
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'errors' => [
+                    'country' => ['The selected country is invalid.']
+                ]
+            ]);
     }
 
     /** @test */
@@ -67,23 +69,23 @@ class UserTest extends ApiTestCase
         $filters = ['active' => 'This is a bad value'];
         
         $this->getJson(route('api.users', $filters))
-                    ->assertStatus(422)
-                    ->assertJsonFragment([
-                        'errors' => [
-                            'active' => ['The active field must be true or false.']
-                        ]
-                    ]);
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'errors' => [
+                    'active' => ['The active field must be true or false.']
+                ]
+            ]);
     }
 
     /** @test */
     public function get_active_users_from_austria()
     {                
         $this->getJson(route('api.austrian.users'))
-                    ->assertStatus(200)
-                    ->assertJsonCount(2, 'data')
-                    ->assertJsonStructure(UserUtils::$usersStructure)
-                    ->assertJsonPath('data.0.id', 1)
-                    ->assertJsonPath('data.1.id', 6);
+            ->assertStatus(200)
+            ->assertJsonCount(2, 'data')
+            ->assertJsonStructure(UserUtils::$usersStructure)
+            ->assertJsonPath('data.0.id', 1)
+            ->assertJsonPath('data.1.id', 6);
     }
 
     /** @test */
@@ -92,91 +94,75 @@ class UserTest extends ApiTestCase
         UserUtils::removeUsersByCountry('AT');
 
         $this->getJson(route('api.austrian.users'))
-                    ->assertStatus(200)
-                    ->assertJsonCount(0, 'data');
+            ->assertStatus(200)
+            ->assertJsonCount(0, 'data');
     }
 
     /** @test */
     public function can_update_user_details()
     {          
-        $details = [
-            'citizenship_country_id' => 1,
-            'first_name' => 'José Manuel',
-            'last_name' => 'Rodríguez Varona',
-            'phone_number' => '000000000'
-        ];
+        $details = factory(UserDetail::class)->make()->toArray();
         
         $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
-                    ->assertStatus(200)
-                    ->assertJson([
-                        'success' => true,
-                        'message' => 'Succesfully'
-                    ]);;
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Succesfully'
+            ]);;
     }
 
     /** @test */
     public function cannot_update_user_details_if_the_country_is_not_in_the_db()
     {          
-        $details = [
-            'citizenship_country_id' => 10000,
-            'first_name' => 'José Manuel',
-            'last_name' => 'Rodríguez Varona',
-            'phone_number' => '000000000'
-        ];
+        $details = factory(UserDetail::class)->make([
+            'citizenship_country_id' => 10000
+        ])->toArray();
         
         $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
-                    ->assertStatus(422)
-                    ->assertJsonFragment([
-                        'errors' => [
-                            'citizenship_country_id' => [
-                                'The selected citizenship country id is invalid.'
-                            ]
-                        ]
-                    ]);
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'errors' => [
+                    'citizenship_country_id' => [
+                        'The selected citizenship country id is invalid.'
+                    ]
+                ]
+            ]);
     }
 
     /** @test */
     public function cannot_update_user_details_if_not_all_required_fields_are_sent()
-    {          
-        $details = [];
-        
-        $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
-                    ->assertStatus(422)
-                    ->assertJsonFragment([
-                        'errors' => [
-                            'citizenship_country_id' => [
-                                'The citizenship country id field is required.'
-                            ],
-                            'first_name' => [
-                                'The first name field is required.'
-                            ],
-                            'last_name' => [
-                                'The last name field is required.'
-                            ],
-                            'phone_number' => [
-                                'The phone number field is required.'
-                            ]
-                        ]
-                    ]);
+    {                  
+        $this->putJson(route('api.update.user.details', ['id' => 1]))
+            ->assertStatus(422)
+            ->assertJsonFragment([
+                'errors' => [
+                    'citizenship_country_id' => [
+                        'The citizenship country id field is required.'
+                    ],
+                    'first_name' => [
+                        'The first name field is required.'
+                    ],
+                    'last_name' => [
+                        'The last name field is required.'
+                    ],
+                    'phone_number' => [
+                        'The phone number field is required.'
+                    ]
+                ]
+            ]);
     }
 
     /** @test */
     public function cannot_update_user_details_if_the_user_has_no_details()
     {        
-        //poner eso en un factory  
-        $details = [
-            'citizenship_country_id' => 1,
-            'first_name' => 'José Manuel',
-            'last_name' => 'Rodríguez Varona',
-            'phone_number' => '000000000'
-        ];
+        $details = factory(UserDetail::class)->make()->toArray();
         
         $this->putJson(route('api.update.user.details', ['id' => 2]), $details)
-                ->assertStatus(500)
-                ->assertJson([
-                    'success' => false,
-                    'message' => "The user doesn't have details"
-                ]);
+            ->assertStatus(500)
+            ->assertJson([
+                'success' => false,
+                'message' => "The user doesn't have details"
+            ]);
     }
 
     /** @test */
@@ -185,7 +171,7 @@ class UserTest extends ApiTestCase
         $id = 'This is an incorrect id';
         
         $this->putJson(route('api.update.user.details', compact('id')))
-                ->assertStatus(404);
+            ->assertStatus(404);
     }
 
     /** @test */
@@ -210,10 +196,18 @@ class UserTest extends ApiTestCase
             ]);
     }
 
-    private function getUsers(array $filters = [])
+    /**
+     * 
+     * Make api.users request
+     * 
+     * @param array $filters. example ['active' => true, 'country' => 'AT']
+     * 
+     * @return \Illuminate\Testing\TestResponse
+     */
+    private function getUsers(array $filters = []) : TestResponse
     {
         return $this->getJson(route('api.users', $filters))
-                    ->assertStatus(200)
-                    ->assertJsonStructure(UserUtils::$usersStructure);
+            ->assertStatus(200)
+            ->assertJsonStructure(UserUtils::$usersStructure);
     }
 }
