@@ -2,14 +2,16 @@
 
 # BitPanda PHP Technical Test #1
 
+Test to demonstrate skills and mastery with PHP
+
+[API Documentation](https://jvarona05.github.io/bitpanda-php-technical-test-1/public/docs/).
+
 ## Requirements
 
 1. Create a call which will return all the users which are `active` (users table) and have an Austrian citizenship.
 2. Create a call which will allow you to edit user details just if the user details are there already.
 3. Create a call which will allow you to delete a user just if no user details exist yet.
 4. Write a feature test for 3. with valid and invalid data
-
-[API Documentation](https://jvarona05.github.io/bitpanda-php-technical-test-1/public/docs/).
 
 ## Main Technologies
 
