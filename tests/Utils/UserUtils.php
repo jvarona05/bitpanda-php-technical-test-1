@@ -2,6 +2,8 @@
 
 namespace Tests\Utils;
 
+use App\Repository\UserRepository;
+
 class UserUtils
 {
     static $usersStructure = [
@@ -16,5 +18,14 @@ class UserUtils
             ]
         ]
     ];
+
+    static function removeUsersByCountry(string $country) : void
+    {
+        $users = UserRepository::getFilteredUsers(compact('country'));
+
+        $users->each(function ($user) {
+            $user->delete();
+        });
+    }
 }
 

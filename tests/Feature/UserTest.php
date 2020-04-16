@@ -64,7 +64,7 @@ class UserTest extends ApiTestCase
     /** @test */
     public function get_an_error_if_an_invalid_active_value_is_sent()
     {        
-        $filters = ['active' => 'this is a bad value'];
+        $filters = ['active' => 'This is a bad value'];
         
         $this->getJson(route('api.users', $filters))
                     ->assertStatus(422)
@@ -73,6 +73,27 @@ class UserTest extends ApiTestCase
                             'active' => ['The active field must be true or false.']
                         ]
                     ]);
+    }
+
+    /** @test */
+    public function get_active_users_from_austria()
+    {                
+        $this->getJson(route('api.austria.users'))
+                    ->assertStatus(200)
+                    ->assertJsonCount(2, 'data')
+                    ->assertJsonStructure(UserUtils::$usersStructure)
+                    ->assertJsonPath('data.0.id', 1)
+                    ->assertJsonPath('data.1.id', 6);
+    }
+
+    /** @test */
+    public function get_empty_array_when_no_austria_users()
+    {                
+        UserUtils::removeUsersByCountry('AT');
+
+        $this->getJson(route('api.austria.users'))
+                    ->assertStatus(200)
+                    ->assertJsonCount(0, 'data');
     }
 
     private function getUsers(array $filters = [])
