@@ -19,6 +19,14 @@ class UserUtils
         ]
     ];
 
+    /**
+     * 
+     * Remove all users from a country
+     * 
+     * @param string $country. example 'AT'
+     * 
+     * @return void
+     */
     static function removeUsersByCountry(string $country) : void
     {
         $users = UserRepository::getFilteredUsers(compact('country'));
