@@ -34,6 +34,14 @@ class UserRepository
         return $users->get();
     }
 
+    /**
+     * Update user details if the user has it
+     * 
+     * @param User $user.
+     * @param array $userDetails. example ['citizenship_country_id' => 1, 'first_name' => 'José', 'last_name' =>'Rodriguez', 'phone_number' => '000']
+     * 
+     * @return \Illuminate\Http\Response
+     */
     static function updateUserDetails(User $user, array $userDetails) : LaravelResponse
     {
         try {
@@ -49,6 +57,13 @@ class UserRepository
         }
     }
 
+    /**
+     * Delete a user if it doesn't have user_details
+     * 
+     * @param User $user.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     static function delete(User $user) : LaravelResponse
     {
         try {
