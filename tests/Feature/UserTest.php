@@ -96,6 +96,89 @@ class UserTest extends ApiTestCase
                     ->assertJsonCount(0, 'data');
     }
 
+    /** @test */
+    public function can_update_user_details()
+    {          
+        $details = [
+            'citizenship_country_id' => 1,
+            'first_name' => 'José Manuel',
+            'last_name' => 'Rodríguez Varona',
+            'phone_number' => '000000000'
+        ];
+        
+        $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
+                    ->assertStatus(200)
+                    ->assertJson([
+                        'success' => true,
+                        'message' => 'Succesfully'
+                    ]);;
+    }
+
+    /** @test */
+    public function cannot_update_user_details_if_the_country_is_not_in_the_db()
+    {          
+        $details = [
+            'citizenship_country_id' => 10000,
+            'first_name' => 'José Manuel',
+            'last_name' => 'Rodríguez Varona',
+            'phone_number' => '000000000'
+        ];
+        
+        $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
+                    ->assertStatus(422)
+                    ->assertJsonFragment([
+                        'errors' => [
+                            'citizenship_country_id' => [
+                                'The selected citizenship country id is invalid.'
+                            ]
+                        ]
+                    ]);
+    }
+
+    /** @test */
+    public function cannot_update_user_details_if_not_all_required_fields_are_sent()
+    {          
+        $details = [];
+        
+        $this->putJson(route('api.update.user.details', ['id' => 1]), $details)
+                    ->assertStatus(422)
+                    ->assertJsonFragment([
+                        'errors' => [
+                            'citizenship_country_id' => [
+                                'The citizenship country id field is required.'
+                            ],
+                            'first_name' => [
+                                'The first name field is required.'
+                            ],
+                            'last_name' => [
+                                'The last name field is required.'
+                            ],
+                            'phone_number' => [
+                                'The phone number field is required.'
+                            ]
+                        ]
+                    ]);
+    }
+
+    /** @test */
+    public function cannot_update_user_details_if_the_user_has_no_details()
+    {        
+        //poner eso en un factory  
+        $details = [
+            'citizenship_country_id' => 1,
+            'first_name' => 'José Manuel',
+            'last_name' => 'Rodríguez Varona',
+            'phone_number' => '000000000'
+        ];
+        
+        $this->putJson(route('api.update.user.details', ['id' => 2]), $details)
+                ->assertStatus(500)
+                ->assertJson([
+                    'success' => false,
+                    'message' => "The user doesn't have details"
+                ]);;
+    }
+
     private function getUsers(array $filters = [])
     {
         return $this->getJson(route('api.users', $filters))
