@@ -31,7 +31,7 @@ Test to demonstrate skills and mastery in PHP.
 ### Clone the project
 
 ```
-git clone https://github.com/jvarona05/bitpanda-sample.git
+git clone https://github.com/jvarona05/bitpanda-php-technical-test-1.git
 
 cd bitpanda-sample
 ```
