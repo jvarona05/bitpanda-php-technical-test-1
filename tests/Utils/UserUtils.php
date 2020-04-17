@@ -2,7 +2,7 @@
 
 namespace Tests\Utils;
 
-use App\Repository\UserRepository;
+use App\Services\UserService;
 
 class UserUtils
 {
@@ -29,7 +29,7 @@ class UserUtils
      */
     static function removeUsersByCountry(string $country) : void
     {
-        $users = UserRepository::getFilteredUsers(compact('country'));
+        $users = UserService::getFilteredUsers(compact('country'));
 
         $users->each(function ($user) {
             $user->delete();

@@ -27,8 +27,22 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class);
     }
 
-    public function hasDetails(){
-    
+    public function hasDetails()
+    {
         return (bool) $this->details;
     }
+
+    /**
+    podemos probar esto para las fechas
+    // Model
+    protected $dates = ['ordered_at', 'created_at', 'updated_at'];
+    public function getSomeDateAttribute($date)
+    {
+        return $date->format('m-d');
+    }
+
+    // View
+    {{ $object->ordered_at->toDateString() }}
+    {{ $object->ordered_at->some_date }}
+    */
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserDetailsRequest;
-use App\Repository\UserRepository;
+use App\Services\UserService;
 use App\Http\Requests\UserFiltersRequest;
 use App\User;
 
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $filters = $request->all();
 
-        $users = UserRepository::getFilteredUsers($filters);
+        $users = UserService::getFilteredUsers($filters);
 
         return UserResource::collection($users);
     }
@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $filters = [ 'country' => 'AT', 'active' => true ];
 
-        $users = UserRepository::getFilteredUsers($filters);
+        $users = UserService::getFilteredUsers($filters);
 
         return UserResource::collection($users);
     }
@@ -73,9 +73,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        //try validated
+        //$category->article()->create($request->validated());
         $inputs = $request->all();
 
-        return UserRepository::updateUserDetails($user, $inputs);
+        return UserService::updateUserDetails($user, $inputs);
     }
 
     /**
@@ -95,6 +97,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return UserRepository::delete($user);
+        return UserService::delete($user);
     }
 }

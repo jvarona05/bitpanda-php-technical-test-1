@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Services;
 
 use Illuminate\Http\Response as LaravelResponse;
 use Illuminate\Database\Eloquent\Collection;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Utils\Response;
 use App\User;
 
-class UserRepository
+class UserService
 {
     /**
      * Returns User Colection filtered by user country and status
