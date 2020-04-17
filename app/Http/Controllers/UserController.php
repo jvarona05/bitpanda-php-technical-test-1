@@ -67,6 +67,9 @@ class UserController extends Controller
      * 
      * @response 500 {"success":false,"message":"The user doesn't have details"}
      * 
+     * @param UserDetailsRequest $request
+     * @param Int $id
+     * 
      * @return \Illuminate\Http\Response
      */
     public function updateDetails(UserDetailsRequest $request, int $id)
@@ -88,6 +91,8 @@ class UserController extends Controller
      * @response {"success":true,"message":"Succesfully"}
      * 
      * @response 500 {"success":false,"message":"The user cannot be deleted because it has details"}
+     * 
+     * @param Int $id
      * 
      * @return \Illuminate\Http\Response
      */

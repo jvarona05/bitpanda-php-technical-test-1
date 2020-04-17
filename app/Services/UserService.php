@@ -11,7 +11,7 @@ use App\User;
 class UserService
 {
     /**
-     * Returns User Colection filtered users by country and status
+     * Returns User Colection filtered by country and status
      * 
      * @param array $filters. example ['active' => true, 'country' => 'AT']
      * 
