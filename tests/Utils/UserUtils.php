@@ -29,7 +29,7 @@ class UserUtils
      */
     static function removeUsersByCountry(string $country) : void
     {
-        $users = UserService::getFilteredUsers(compact('country'));
+        $users = UserService::getUsersByFilters(compact('country'));
 
         $users->each(function ($user) {
             $user->delete();

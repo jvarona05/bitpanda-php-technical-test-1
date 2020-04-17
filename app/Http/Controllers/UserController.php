@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $filters = $request->all();
 
-        $users = UserService::getFilteredUsers($filters);
+        $users = UserService::getUsersByFilters($filters);
 
         return UserResource::collection($users);
     }
@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $filters = [ 'country' => 'AT', 'active' => true ];
 
-        $users = UserService::getFilteredUsers($filters);
+        $users = UserService::getUsersByFilters($filters);
 
         return UserResource::collection($users);
     }

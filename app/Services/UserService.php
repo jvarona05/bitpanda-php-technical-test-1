@@ -11,13 +11,13 @@ use App\User;
 class UserService
 {
     /**
-     * Returns User Colection filtered by user country and status
+     * Returns User Colection filtered users by country and status
      * 
      * @param array $filters. example ['active' => true, 'country' => 'AT']
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    static function getFilteredUsers(array $filters = []) : Collection
+    static function getUsersByFilters(array $filters = []) : Collection
     {
         $users = User::with('details');
 
