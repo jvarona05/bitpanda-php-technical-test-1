@@ -9,18 +9,6 @@ class UserDetail extends Model
     public $timestamps = false;
 
     /**
-    //let try this
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
-    ....
-
-    $this->user->create($request->validated());
-    */
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
