@@ -73,9 +73,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        //try validated
-        //$category->article()->create($request->validated());
-        $inputs = $request->all();
+        $inputs = $request->validated();
 
         return UserService::updateUserDetails($user, $inputs);
     }
